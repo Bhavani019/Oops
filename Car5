@@ -1,0 +1,76 @@
+Input:
+{"color": "Red", "max_speed": 250, "acceleration": 10, "tyre_friction": 3}
+
+Output:
+10.0
+7.0
+4.0
+1.0
+0
+
+---------------------------------------------------
+
+"""
+>>> car = Car(color="Red", max_speed=250, acceleration=10, tyre_friction=3)
+>>> car.start_engine()
+>>> car.accelerate()
+>>> car.current_speed
+10
+>>> car.apply_brakes()
+>>> car.current_speed
+7
+>>> car.apply_brakes()
+>>> car.current_speed
+4
+>>> car.apply_brakes()
+>>> car.current_speed
+1
+>>> car.apply_brakes()
+>>> car.current_speed
+0
+"""
+
+
+class Car:
+    def __init__(self,color,max_speed,acceleration,tyre_friction):
+        self.color = color
+        self.max_speed = max_speed
+        self.acceleration = acceleration
+        self.tyre_friction = tyre_friction
+        
+    def start_engine(self):
+        self.current_speed = 0
+    
+    def accelerate(self):
+        self.current_speed += self.acceleration
+    
+    def apply_brakes(self):
+        if self.current_speed >= self.tyre_friction:
+            self.current_speed -= self.tyre_friction
+        else:
+            self.current_speed = 0
+
+
+if __name__ == "__main__":
+    import json
+    detail = json.loads(input())
+
+    color = detail["color"]
+    max_speed = float(detail["max_speed"])
+    acceleration = float(detail["acceleration"])
+    tyre_friction = float(detail["tyre_friction"])
+
+    car = Car(color=color, max_speed=max_speed, acceleration=acceleration,
+              tyre_friction=tyre_friction)
+
+    car.start_engine()
+    car.accelerate()
+    print(car.current_speed)
+    car.apply_brakes()
+    print(car.current_speed)
+    car.apply_brakes()
+    print(car.current_speed)
+    car.apply_brakes()
+    print(car.current_speed)
+    car.apply_brakes()
+    print(car.current_speed)
