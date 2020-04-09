@@ -1,0 +1,26 @@
+Input:
+[1,2]
+
+Output:
+1
+-2
+
+-----------------------------------------------------------
+
+class ComplexNumber:
+    def __init__(self,real_part=0,imaginary_part=0):
+        self.real_part = real_part
+        self.imaginary_part = imaginary_part
+        
+    def conjugate(self):
+        return ComplexNumber(self.real_part,-self.imaginary_part)
+
+if __name__ == "__main__":
+    import json
+    input_args = list(json.loads(input()))
+
+    complex_number = ComplexNumber(*input_args)
+    complex_number_conjugate = complex_number.conjugate()
+
+    print(complex_number_conjugate.real_part)
+    print(complex_number_conjugate.imaginary_part)
