@@ -1,0 +1,24 @@
+Input:
+[1,2]
+
+Output:
+2.236
+
+----------------------------------------------------------------------------------------------------------------------------
+
+class ComplexNumber:
+    def __init__(self,real=0,imaginary=0):
+        self.real_part = real
+        self.imaginary_part = imaginary
+        
+    def __abs__(self):
+        return math.sqrt(self.real_part**2 + self.imaginary_part**2)
+
+
+if __name__ == "__main__":
+    import json
+    import math
+    input_args = list(json.loads(input()))
+    complex_number = ComplexNumber(*input_args)
+    absolute_value = abs(complex_number)
+    print(round(absolute_value,3))
