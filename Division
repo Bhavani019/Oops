@@ -1,0 +1,31 @@
+Input:
+[[1,2],[3,4]]
+
+Output:
+0.44
+0.08
+
+---------------------------------------------------------------------------------------------------------------------------
+
+class ComplexNumber:
+    def __init__(self,real_part=0,imaginary_part=0):
+        self.real_part = real_part
+        self.imaginary_part = imaginary_part
+        
+    def __truediv__(self,my):
+        self_real,self_imaginary,my_real,my_imaginary = self.real_part, self.imaginary_part, my.real_part,my.imaginary_part
+        r = float(my_real**2 + my_imaginary**2)
+        return ComplexNumber((self_real*my_real + self_imaginary*my_imaginary)/r, (self_imaginary*my_real - self_real*my_imaginary)/r)
+        
+        
+if __name__ == "__main__":
+    import json
+    input_args = list(json.loads(input()))
+
+    complex_number1 = ComplexNumber(*input_args[0])
+    complex_number2 = ComplexNumber(*input_args[1])
+
+    complex_numbers_division = complex_number1 / complex_number2
+
+    print(complex_numbers_division.real_part)
+    print(complex_numbers_division.imaginary_part)
