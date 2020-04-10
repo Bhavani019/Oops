@@ -1,0 +1,31 @@
+Input:
+[[1,2],[3,4]]
+
+Output:
+-5
+10
+
+--------------------------------------------------------------------------------------------------------------------
+
+class ComplexNumber:
+    def __init__(self,real=0,imaginary=0):
+        self.real_part = real
+        self.imaginary_part = imaginary
+    
+    def __mul__(self, my):
+        real = self.real_part * my.real_part - self.imaginary_part * my.imaginary_part
+        imaginary = self.imaginary_part * my.real_part + self.real_part * my.imaginary_part
+        return ComplexNumber(real,imaginary)
+
+
+if __name__ == "__main__":
+    import json
+    input_args = list(json.loads(input()))
+
+    complex_number1 = ComplexNumber(*input_args[0])
+    complex_number2 = ComplexNumber(*input_args[1])
+
+    complex_numbers_multiplication = complex_number1 * complex_number2
+
+    print(complex_numbers_multiplication.real_part)
+    print(complex_numbers_multiplication.imaginary_part)
