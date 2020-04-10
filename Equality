@@ -1,0 +1,31 @@
+Input:
+[[1,2],[1,2]]
+
+Output:
+True
+
+---------------------------------------------------------------------------------------------------------------------------
+
+class ComplexNumber:
+    def __init__(self,real = 0 ,imaginary = 0):
+        self.real_part = real
+        self.imaginary_part = imaginary
+        
+    def __eq__(self,my):
+        if self.real_part == my.real_part and self.imaginary_part== my.imaginary_part:
+            return True
+        else:
+            return False
+        
+
+
+if __name__ == "__main__":
+    import json
+    input_args = list(json.loads(input()))
+
+    complex_number1 = ComplexNumber(*input_args[0])
+    complex_number2 = ComplexNumber(*input_args[1])
+
+    is_complex_numbers_equal = complex_number1 == complex_number2
+
+    print(is_complex_numbers_equal)
