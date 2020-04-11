@@ -1,0 +1,61 @@
+Input:
+[2,2]
+
+
+Output:
+True
+True
+True
+False
+4
+
+---------------------------------------------------------------------------------------------------------------------------
+
+class Block:
+    def __init__(self,value):
+        self._value = value
+        
+    @property
+    def value(self):
+        return self._value
+
+class SuperBlock(Block):
+    def __mul__(self,my):
+        return Block(self._value*my._value)
+    
+
+if __name__ == "__main__":
+    import json
+    input_args = json.loads(input())
+
+    super_block_one = SuperBlock(input_args[0])
+    super_block_two = SuperBlock(input_args[1])
+
+    try:
+        super_block_one._value
+    except AttributeError:
+        print("Missed protecting value")
+
+    try:
+        super_block_one.value = 1
+        print("Missed setting safe access to value")
+    except AttributeError:
+        pass
+
+    print(isinstance(super_block_one, SuperBlock))
+
+    print(isinstance(super_block_one, Block))
+
+    product_block = super_block_one * super_block_two
+
+    print(isinstance(product_block, Block))
+    print(isinstance(product_block, SuperBlock))
+    print(product_block.value)
+
+    block_four = Block(4)
+
+    try:
+        block_four * product_block
+        print("Multiplication is not supported on Block objects")
+    except TypeError:
+        pass
