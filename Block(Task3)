@@ -1,0 +1,33 @@
+Input:
+[2, 2]
+
+Output:
+True
+4
+
+-------------------------------------------------------------------------------------------------------------------------
+
+class Block:
+    def __init__(self,value):
+        self.value = value
+        
+    def __add__(self,my):
+        if self.value == my.value:
+            self.value += self.value
+            return self
+        else:
+            print('Cannot add blocks with different values')
+
+if __name__ == "__main__":
+    import json
+
+    input_args = json.loads(input())
+
+    block_one = Block(input_args[0])
+    block_two = Block(input_args[1])
+
+    block_result = block_one + block_two
+    print(isinstance(block_result, Block))
+    
+    if isinstance(block_result, Block):
+        print(block_result.value)
