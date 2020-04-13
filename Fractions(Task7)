@@ -1,0 +1,73 @@
+Input:
+[23, 43]
+
+Output:
+23/43 = 0.535
+True
+0.535
+
+--------------------------------------------------------------------------------------------------------------------------
+
+class Fraction(object):
+    def __init__(self,numerator,denominator):
+        if numerator<0 and denominator<0:
+            self._numerator = abs(int(numerator))
+            self._denominator = abs(int(denominator))
+        elif denominator<0:
+            self._numerator = -(int(numerator))
+            self._denominator = abs(int(denominator))
+        else:
+            self._numerator = int(numerator)
+            self._denominator = int(denominator)
+     
+    @property   
+    def numerator(self):
+        self._numerator = numerator
+        
+    @property   
+    def denominator(self):
+        self._denominator = denominator
+        
+    def to_value(self):
+        x = self._numerator/self._denominator
+        y = round(x,3)
+        print(str(self._numerator)+'/'+str(self._denominator)+' = '+ str(y))
+        return y
+        
+    
+  #  def __str__(self):
+        
+
+if __name__ == "__main__":
+    import json
+
+    input_args = list(json.loads(input()))
+
+    fraction_one = Fraction(*input_args)
+
+    result_decimal_value = fraction_one.to_value()
+
+    try:
+        fraction_one._numerator
+    except AttributeError:
+        print("Missed protecting numerator")
+
+    try:
+        fraction_one._denominator
+    except AttributeError:
+        print("Missed protecting denominator")
+
+    try:
+        fraction_one.numerator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+
+    try:
+        fraction_one.denominator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+
+    print(isinstance(fraction_one, Fraction))
+    print(result_decimal_value)
