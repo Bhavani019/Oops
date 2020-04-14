@@ -1,0 +1,83 @@
+Input:
+[[1, 2], [1, 2]]
+
+Output:
+1/2 / 1/2 = 1/1
+True
+True
+1
+1
+
+-----------------------------------------------------------------------------------------------------------------------
+
+import math
+class Fraction(object):
+    def __init__(self,numerator = 0,denominator=0):
+        if numerator<0 and denominator<0:
+            self._numerator = abs(int(numerator))
+            self._denominator = abs(int(denominator))
+        elif denominator<0:
+            self._numerator = -(int(numerator))
+            self._denominator = abs(int(denominator))
+        else:
+            self._numerator = int(numerator)
+            self._denominator = int(denominator)
+        x = math.gcd(self._numerator,self._denominator)
+        self._numerator = int(self._numerator/x)
+        self._denominator = int(self._denominator/x)
+       
+            
+    def __truediv__(self,my):
+        numerator = self._numerator*my._denominator
+        denominator = self._denominator*my._numerator
+        k=Fraction(numerator,denominator)
+        return k
+ 
+        
+    @property
+    def numerator(self):
+        return self._numerator
+            
+    @property
+    def denominator(self):
+        return self._denominator
+
+
+if __name__ == "__main__":
+    import json
+    #from fractions import Fraction
+    input_args = list(json.loads(input()))
+
+    fraction_one = Fraction(*input_args[0])
+    fraction_two = Fraction(*input_args[1])
+
+    result_fraction = fraction_one / fraction_two
+
+    try:
+        fraction_one._numerator
+    except AttributeError:
+        print("Missed protecting numerator")
+
+    try:
+        fraction_one._denominator
+    except AttributeError:
+        print("Missed protecting denominator")
+
+    try:
+        fraction_one.numerator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+
+    try:
+        fraction_one.denominator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+    
+    print(str(fraction_one.numerator) + '/' + str(fraction_one.denominator) + ' / ' + str(fraction_two.numerator) + '/' + str(fraction_two.denominator) + ' = ' + str(result_fraction.numerator) + '/' + str(result_fraction.denominator))
+    
+    print(isinstance(fraction_one, Fraction))
+    print(isinstance(fraction_two, Fraction))
+    print(result_fraction.numerator)
+    print(result_fraction.denominator)
