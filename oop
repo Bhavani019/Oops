@@ -1,0 +1,87 @@
+class Pokemon:
+    sound=""
+    running=""
+    swimming=""
+    flying=""
+    
+    def __init__(self,name,level):
+        self._name=name
+        self._level=level
+        
+        if self._name == "":
+            raise ValueError ("name cannot be empty")
+        
+        if self._level <=0:
+            raise ValueError ("level should be > 0")
+
+    @property
+    def name(self):
+        return self._name
+    @property    
+    def level(self):
+        return self._level
+    
+    def __str__(self):
+        return ("{} - Level {}".format(self._name,self._level))
+ 
+    @classmethod
+    def make_sound(cls):
+        print(cls.sound)
+    @classmethod
+    def run(cls):
+        print(cls.running)
+        
+    @classmethod
+    def swim(cls):
+        print(cls.swimming)
+        
+    @classmethod
+    def fly(cls):
+        print(cls.flying)
+
+class Pikachu(Pokemon):
+    sound="Pika Pika"
+    running="Pikachu running..."
+    
+    def attack(self):
+        print("Electric attack with {} damage".format((self._level)*10))
+        self._level += 1
+        
+ 
+class Squirtle(Pokemon):
+    sound="Squirtle...Squirtle"
+    running="Squirtle running..."
+    swimming="Squirtle swimming..."
+    
+    def attack(self):
+        print("Water attack with {} damage".format((self._level)*9))
+        self._level += 1
+
+class Pidgey(Pokemon):
+    sound="Pidgey...Pidgey"
+    flying="Pidgey flying..."
+         
+    def attack(self):
+        print("Air attack with {} damage".format((self._level)*5))
+        self._level +=1
+
+
+class Swanna(Pokemon):
+    sound="Swanna...Swanna"
+    flying="Swanna flying..."
+    swimming="Swanna swimming..."
+    
+    def attack(self):
+        print("Water attack with {} damage".format((self._level)*9))
+        print("Air attack with {} damage".format((self._level)*5))
+        self._level += 1
+
+class Zapdos(Pokemon):
+    sound="Zap...Zap"
+    flying="Zapdos flying..."
+    
+    def attack(self):
+        print("Electric attack with {} damage".format((self._level)*10))
+        print("Air attack with {} damage".format((self._level)*5))
+        self._level += 1
+
